@@ -57,7 +57,7 @@ const productctrl = {
         success(res, result, "Input To Product Data Success")
       })
       .catch((err)=>{
-        failed(res, 404, err)
+        failed(res, 400, err)
       })
     }
     catch(err){
@@ -91,7 +91,7 @@ const productctrl = {
         success(res, result, "Update Product Data Success")
       })
       .catch((err)=>{
-        failed(res, 404, err)
+        failed(res, 400, err)
       })
     }
     catch(err){

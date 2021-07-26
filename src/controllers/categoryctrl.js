@@ -55,7 +55,7 @@ const categoryctrl = {
         success(res, result, "Input To Category Data Success")
       })
       .catch((err)=>{
-        failed(res, 404, err)
+        failed(res, 400, err)
       })
     }
     catch(err){
@@ -86,7 +86,7 @@ const categoryctrl = {
         success(res, result, "Update Category Data Success")
       })
       .catch((err)=>{
-        failed(res, 404, err)
+        failed(res, 400, err)
       })
     }
     catch(err){

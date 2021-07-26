@@ -64,7 +64,7 @@ const userctrl = {
         success(res, result, "Input To User Data Success")
       })
       .catch((err)=>{
-        failed(res, 404, err)
+        failed(res, 400, err)
       })
     }
     catch(err){
@@ -103,7 +103,7 @@ const userctrl = {
         success(res, result, "Update User Data Success")
       })
       .catch((err)=>{
-        failed(res, 404, err)
+        failed(res, 400, err)
       })
     }
     catch(err){
