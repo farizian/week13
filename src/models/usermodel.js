@@ -2,6 +2,18 @@
 const db = require('../config/db')
 
 const usermodel ={
+  gettotal: ()=>{
+    return new Promise((resolve, reject)=>{
+      db.query(`select * from user`, (err, result)=>{
+        if(err){
+          reject(err)
+        }
+        else{
+          resolve(result.length)
+        }
+      })
+    })
+  },
   getlist:(search, field, sort, limit, offset)=>{
     return new Promise((resolve, reject)=>{
       db.query(`select * from user where username like "%${search}%" order by ${field} ${sort} limit ${limit} offset ${offset}`, async(err, result)=>{
@@ -9,25 +21,7 @@ const usermodel ={
           reject(err)
         }
         else{
-          const total = await new Promise((resolve, reject)=>{
-            db.query(`select * from user`, (err, result)=>{
-              if(err){
-                reject(err)
-              }
-              else{
-                resolve(result.length)
-              }
-            })
-          })
-          const totalpage= Math.ceil(total/limit)
-          const output = {
-            data: result,
-            totalpage: totalpage,
-            search: search,
-            limit: limit,
-            page: offset === 0 ? 1 : offset,
-          }
-          resolve(output)
+          resolve(result)
         }
       })
     })
@@ -44,9 +38,9 @@ const usermodel ={
       })
     })
   },
-  insert:(first, last, birth, gender, username, email, password, address, phone, payment, subtotal, tax, shipping)=>{
+  insert:(first, last, birth, gender, username, email, password, address, phone)=>{
     return new Promise((resolve, reject)=>{
-      db.query(`insert into user (first_name, last_name, birth_date, gender, username, email, password, address, phone_number, payment_method, sub_total, tax, shipping) value ('${first}', '${last}', '${birth}', '${gender}', '${username}', '${email}', '${password}', '${address}', '${phone}', '${payment}', '${subtotal}', '${tax}', '${shipping}')`, (err, result)=>{
+      db.query(`insert into user (first_name, last_name, birth_date, gender, username, email, password, address, phone_number) value ('${first}', '${last}', '${birth}', '${gender}', '${username}', '${email}', '${password}', '${address}', '${phone}')`, (err, result)=>{
         if(err){
           reject(err)
         }
@@ -68,9 +62,9 @@ const usermodel ={
       })
     })
   },
-  update:(id, first, last, birth, gender, username, email, password, address, phone, payment, subtotal, tax, shipping)=>{
+  update:(id, first, last, birth, gender, username, email, password, address, phone)=>{
     return new Promise((resolve, reject)=>{
-      db.query(`update user set first_name="${first}", last_name="${last}", birth_date="${birth}", gender="${gender}", username="${username}", email="${email}", password="${password}", address="${address}", phone_number="${phone}", payment_method="${payment}", sub_total="${subtotal}", tax="${tax}", shipping="${shipping}" where id="${id}"`, (err, result)=>{
+      db.query(`update user set first_name="${first}", last_name="${last}", birth_date="${birth}", gender="${gender}", username="${username}", email="${email}", password="${password}", address="${address}", phone_number="${phone}" where id="${id}"`, (err, result)=>{
         if(err){
           reject(err)
         }

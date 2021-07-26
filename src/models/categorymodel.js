@@ -2,6 +2,18 @@
 const db = require('../config/db')
 
 const categorymodel ={
+  gettotal: ()=>{
+    return new Promise((resolve, reject)=>{
+      db.query(`select * from category`, (err, result)=>{
+        if(err){
+          reject(err)
+        }
+        else{
+          resolve(result.length)
+        }
+      })
+    })
+  },
   getlist:(search, field, sort, limit, offset)=>{
     return new Promise((resolve, reject)=>{
       db.query(`select * from category where category like "%${search}%" order by ${field} ${sort} limit ${limit} offset ${offset}`, async(err, result)=>{
@@ -9,25 +21,7 @@ const categorymodel ={
           reject(err)
         }
         else{
-          const total = await new Promise((resolve, reject)=>{
-            db.query(`select * from category`, (err, result)=>{
-              if(err){
-                reject(err)
-              }
-              else{
-                resolve(result.length)
-              }
-            })
-          })
-          const totalpage= Math.ceil(total/limit)
-          const output = {
-            data: result,
-            totalpage: totalpage,
-            search: search,
-            limit: limit,
-            page: offset === 0 ? 1 : offset,
-          }
-          resolve(output)
+          resolve(result)
         }
       })
     })

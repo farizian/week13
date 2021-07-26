@@ -1,5 +1,6 @@
 
 const models = require('../models/categorymodel')
+const {success, failed} = require('../helper/response')
 
 // table category di dalam database coffee_shop di mysql
 const categoryctrl = {
@@ -12,31 +13,37 @@ const categoryctrl = {
       const sort = query.sort === undefined ? "asc" : query.sort
       const limit = query.limit === undefined ? 50 : query.limit
       const offset = query.page === undefined || query.page == 1 ? 0 : (query.page-1)*limit
-      models.getlist(search, field, sort, limit, offset).then((result)=>{
-        res.json(result)
+      models.getlist(search, field, sort, limit, offset).then(async(result)=>{
+        const total = await models.gettotal()
+        const output = {
+          search: search,
+          limit: limit,
+          page: query.page,
+          totalpage: Math.ceil(total/limit),
+        }
+        success(res, output, result, "Get Category Data Success")
       })
       .catch((err)=>{
-        res.json(err)
+        failed(res, 500, err)
       })
     }
     catch(err){
-      res.json(err)
+      failed(res, 401, err)
     }
-
   },
 // menampilkan detail table category berdasarkan id
   getdetail: (req, res)=>{
     try{
       const id = req.params.id //url parameter untuk mengambil id
       models.getdetail(id).then((result)=>{
-        res.json(result)
+        success(res, result, "Get Category Data Success")
       })
       .catch((err)=>{
-        res.json(err)
+        failed(res, 500, err)
       })
     }
     catch(err){
-      res.json(err)
+      failed(res, 401, err)
     }
   },
 // insert data category
@@ -45,28 +52,29 @@ const categoryctrl = {
       body = req.body
       category = body.category
       models.insert(category).then((result)=>{
-        res.json(result)
+        success(res, result, "Input To Category Data Success")
       })
       .catch((err)=>{
-        res.json(err)
+        failed(res, 404, err)
       })
     }
     catch(err){
-      res.json(err)
+      failed(res, 408, err)
     }
   },
+  // delete data category
   del: (req, res)=>{
     try{
       const id = req.params.id
       models.del(id).then((result)=>{
-        res.json(result)
+        success(res, result, "Delete Category Data Success")
       })
       .catch((err)=>{
-        res.json(err)
+        failed(res, 404, err)
       })
     }
     catch(err){
-      res.json(err)
+      failed(res, 408, err)
     }
   },
   update: (req, res)=>{
@@ -75,14 +83,14 @@ const categoryctrl = {
       id = req.params.id
       category = body.category
       models.update(id, category).then((result)=>{
-        res.json(result)
+        success(res, result, "Update Category Data Success")
       })
       .catch((err)=>{
-        res.json(err)
+        failed(res, 404, err)
       })
     }
     catch(err){
-      res.json(err)
+      failed(res, 500, err)
     }
   },
 }
