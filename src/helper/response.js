@@ -1,7 +1,7 @@
 const response = {
     success: (res, data, message)=>{
         const response={
-            data: data,
+            field: data,
             success: true,
             code: 200,
             message: message

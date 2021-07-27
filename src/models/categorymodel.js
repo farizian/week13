@@ -38,9 +38,9 @@ const categorymodel ={
       })
     })
   },
-  insert:(category)=>{
+  insert:(id_ins, category)=>{
     return new Promise((resolve, reject)=>{
-      db.query(`insert into category (category) value ('${category}')`, (err, result)=>{
+      db.query(`insert into category (id, category) value ('${id_ins}','${category}')`, (err, result)=>{
         if(err){
           reject(err)
         }
@@ -62,9 +62,9 @@ const categorymodel ={
       })
     })
   },
-  update:(id, category)=>{
+  update:(id, id_upd, category)=>{
     return new Promise((resolve, reject)=>{
-      db.query(`update category set category='${category}' where id="${id}"`, (err, result)=>{
+      db.query(`update category set id='${id_upd}', category='${category}' where id="${id}"`, (err, result)=>{
         if(err){
           reject(err)
         }

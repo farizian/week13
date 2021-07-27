@@ -17,12 +17,13 @@ const userctrl = {
       .then(async(result)=>{
         const total = await models.gettotal()
         const output = {
+          data: result,
           search: search,
           limit: limit,
           page: query.page,
           totalpage: Math.ceil(total/limit),
         }
-        success(res, output, result, "get user data success")
+        success(res, output, "get user data success")
       })
       .catch((err)=>{
         failed(res, 500, err)
@@ -51,6 +52,7 @@ const userctrl = {
   insert: (req, res)=>{
     try{
       body = req.body
+      id_ins = body.id
       first = body.first_name
       last = body.last_name
       birth = body.birth_date
@@ -60,7 +62,7 @@ const userctrl = {
       password = body.password
       address = body.address
       phone = body.phone_number
-      models.insert(first, last, birth, gender, username, email, password, address, phone).then((result)=>{
+      models.insert(id_ins, first, last, birth, gender, username, email, password, address, phone).then((result)=>{
         success(res, result, "Input To User Data Success")
       })
       .catch((err)=>{
@@ -90,6 +92,7 @@ const userctrl = {
     try{
       body = req.body
       id = req.params.id
+      id_upd = body.id
       first = body.first_name
       last = body.last_name
       birth = body.birth_date
@@ -99,7 +102,7 @@ const userctrl = {
       password = body.password
       address = body.address
       phone = body.phone_number
-      models.update(id, first, last, birth, gender, username, email, password, address, phone).then((result)=>{
+      models.update(id, id_upd, first, last, birth, gender, username, email, password, address, phone).then((result)=>{
         success(res, result, "Update User Data Success")
       })
       .catch((err)=>{

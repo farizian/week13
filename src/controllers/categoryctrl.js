@@ -16,12 +16,13 @@ const categoryctrl = {
       models.getlist(search, field, sort, limit, offset).then(async(result)=>{
         const total = await models.gettotal()
         const output = {
+          data: result,
           search: search,
           limit: limit,
           page: query.page,
           totalpage: Math.ceil(total/limit),
         }
-        success(res, output, result, "Get Category Data Success")
+        success(res, output, "Get Category Data Success")
       })
       .catch((err)=>{
         failed(res, 500, err)
@@ -51,7 +52,8 @@ const categoryctrl = {
     try{
       body = req.body
       category = body.category
-      models.insert(category).then((result)=>{
+      id_ins = body.id
+      models.insert(id_ins, category).then((result)=>{
         success(res, result, "Input To Category Data Success")
       })
       .catch((err)=>{
@@ -81,8 +83,9 @@ const categoryctrl = {
     try{
       body = req.body
       id = req.params.id
+      id_upd = body.id
       category = body.category
-      models.update(id, category).then((result)=>{
+      models.update(id, id_upd, category).then((result)=>{
         success(res, result, "Update Category Data Success")
       })
       .catch((err)=>{

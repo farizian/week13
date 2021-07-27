@@ -55,7 +55,8 @@ const productctrl = {
       name = body.name
       price = body.price
       category = body.category_id
-      models.insert(picture, name, price, category).then((result)=>{
+      id_ins = body.id
+      models.insert(id_ins, picture, name, price, category).then((result)=>{
         success(res, result, "Input To Product Data Success")
       })
       .catch((err)=>{
@@ -90,7 +91,8 @@ const productctrl = {
       name = body.name
       price = body.price
       category = body.category_id
-      models.update(id, picture, name, price, category).then((result)=>{
+      id_upd = body.id
+      models.update(id, id_upd, picture, name, price, category).then((result)=>{
         success(res, result, "Update Product Data Success")
       })
       .catch((err)=>{
