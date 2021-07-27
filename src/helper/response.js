@@ -1,15 +1,14 @@
 const response = {
-    success: (res, output, data, message)=>{
+    success: (res, data, message)=>{
         const response={
             data: data,
-            output: output,
             success: true,
             code: 200,
             message: message
         }
         res.json(response)
     },
-    failed: (res, code)=>{
+    failed: (res, code, err)=>{
         if (code === 500){
             const response ={
                 success: false,

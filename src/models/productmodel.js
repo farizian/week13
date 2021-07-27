@@ -21,8 +21,6 @@ const prdmodel ={
           reject(err)
         }
         else{
-          
-          
           resolve(result)
         }
       })
@@ -40,9 +38,9 @@ const prdmodel ={
       })
     })
   },
-  insert:(picture, name, price)=>{
+  insert:(picture, name, price, category)=>{
     return new Promise((resolve, reject)=>{
-      db.query(`insert into product (picture, name, price) value ('${picture}', '${name}', '${price}')`, (err, result)=>{
+      db.query(`insert into product (picture, name, price, category_id) value ('${picture}', '${name}', '${price}', '${category}')`, (err, result)=>{
         if(err){
           reject(err)
         }
@@ -64,9 +62,9 @@ const prdmodel ={
       })
     })
   },
-  update:(id, picture, name, price)=>{
+  update:(id, picture, name, price, category)=>{
     return new Promise((resolve, reject)=>{
-      db.query(`update product set picture='${picture}', name='${name}', price='${price}' where id="${id}"`, (err, result)=>{
+      db.query(`update product set picture='${picture}', name='${name}', price='${price}', category_id='${category}' where id='${id}' `, (err, result)=>{
         if(err){
           reject(err)
         }

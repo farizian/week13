@@ -16,12 +16,13 @@ const productctrl = {
       models.getlist(search, field, sort, limit, offset).then(async(result)=>{
         const total = await models.gettotal()
         const output = {
+          data: result,
           search: search,
           limit: limit,
           page: query.page,
           totalpage: Math.ceil(total/limit),
         }
-        success(res, output, result, "get Product Data success")
+        success(res, output, "get Product Data success")
       })
       .catch((err)=>{
         failed(res, 500, err)
@@ -53,7 +54,8 @@ const productctrl = {
       picture = body.picture
       name = body.name
       price = body.price
-      models.insert(picture, name, price).then((result)=>{
+      category = body.category_id
+      models.insert(picture, name, price, category).then((result)=>{
         success(res, result, "Input To Product Data Success")
       })
       .catch((err)=>{
@@ -87,7 +89,8 @@ const productctrl = {
       picture = body.picture
       name = body.name
       price = body.price
-      models.update(id, picture, name, price).then((result)=>{
+      category = body.category_id
+      models.update(id, picture, name, price, category).then((result)=>{
         success(res, result, "Update Product Data Success")
       })
       .catch((err)=>{
