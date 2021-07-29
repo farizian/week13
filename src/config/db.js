@@ -1,22 +1,21 @@
-const mysql = require('mysql2')
-const env = require('../helper/env')
+const mysql = require('mysql2');
+const env = require('../helper/env');
 
 // membuat koneksi ke db mysql
-const data = mysql.createConnection ({
-    host: 'localhost',
-    user: env.db_username,
-    password: env.db_password,
-    database: 'coffee_shop',
-})
+const data = mysql.createConnection({
+  host: 'localhost',
+  user: env.db_username,
+  password: env.db_password,
+  database: 'coffee_shop',
+});
 // mengekspor koneksi db
-data.connect((err)=>{
-    if(err){
-        console.log(err)
-    }
-    else{
-        console.log("connection success")
-    }
-})
+data.connect((err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log('connection success');
+  }
+});
 
 // export
-module.exports = data
+module.exports = data;
