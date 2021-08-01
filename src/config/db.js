@@ -3,7 +3,7 @@ const env = require('../helper/env');
 
 // membuat koneksi ke db mysql
 const data = mysql.createConnection({
-  host: 'localhost',
+  host: env.host,
   user: env.db_username,
   password: env.db_password,
   database: 'coffee_shop',
