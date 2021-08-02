@@ -27,6 +27,15 @@ const standartResponse = {
         message: 'Bad Request',
       };
       res.json(response);
+    } else if (code === 423) {
+      const response = {
+        success: false,
+        data: null,
+        code,
+        error: err,
+        message: 'Wrong Token',
+      };
+      res.json(response);
     } else if (code === 401) {
       const response = {
         success: false,
