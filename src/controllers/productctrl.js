@@ -8,7 +8,7 @@ const productctrl = {
     try {
       const { query } = req;
       const search = query.search === undefined ? '' : query.search;
-      const field = query.field === undefined ? 'name' : query.field;
+      const field = query.field === undefined ? 'prdname' : query.field;
       const sort = query.sort === undefined ? 'asc' : query.sort;
       const limit = query.limit === undefined ? 50 : query.limit;
       const offset = query.page === undefined || query.page === 1 ? 0 : (query.page - 1) * limit;

@@ -12,7 +12,7 @@ const prdmodel = {
     });
   }),
   getlist: (search, field, sort, limit, offset) => new Promise((resolve, reject) => {
-    db.query(`select p.id, p.idStyle, p.img, p.disc, p.prdname, p.price, c.category, p.qty from product p left join category c on p.category_id=c.id where name like "%${search}%" order by ${field} ${sort} limit ${limit} offset ${offset}`, async (err, result) => {
+    db.query(`select p.id, p.idStyle, p.img, p.disc, p.prdname, p.price, c.category, p.qty from product p left join category c on p.category_id=c.id where prdname like "%${search}%" order by ${field} ${sort} limit ${limit} offset ${offset}`, async (err, result) => {
       if (err) {
         reject(err);
       } else {
