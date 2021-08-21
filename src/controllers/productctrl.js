@@ -48,12 +48,14 @@ const productctrl = {
   insert: (req, res) => {
     try {
       const { body } = req;
-      const { picture } = body;
-      const { name } = body;
+      const { idStyle } = body;
+      const { img } = body;
+      const { disc } = body;
+      const { prdname } = body;
       const { price } = body;
       const category = body.category_id;
-      const idIns = body.id;
-      models.insert(idIns, picture, name, price, category).then((result) => {
+      const { qty } = body;
+      models.insert(idStyle, img, disc, prdname, price, category, qty).then((result) => {
         success(res, result, 'Input To Product Data Success');
       })
         .catch((err) => {
@@ -82,12 +84,13 @@ const productctrl = {
     try {
       const { body } = req;
       const { id } = req.params;
-      const { picture } = body;
-      const { name } = body;
+      const { idStyle } = body;
+      const { img } = body;
+      const { disc } = body;
+      const { prdname } = body;
       const { price } = body;
       const category = body.category_id;
-      const idUpd = body.id;
-      models.update(id, idUpd, picture, name, price, category).then((result) => {
+      models.update(id, idStyle, img, disc, prdname, price, category).then((result) => {
         success(res, result, 'Update Product Data Success');
       })
         .catch((err) => {

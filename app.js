@@ -11,5 +11,6 @@ app.use(prdrouter);
 app.use(catrouter);
 
 app.listen(3000, () => {
+  // eslint-disable-next-line no-console
   console.log('Service berjalan di port 3000');
 });
