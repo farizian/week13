@@ -2,7 +2,7 @@
 /* eslint-disable max-len */
 const bcrypt = require('bcrypt');
 const models = require('../models/usermodel');
-const { success, failed } = require('../helper/response');
+const { success, failed, successlogin } = require('../helper/response');
 const env = require('../helper/env');
 
 // table user di dalam database coffee_shop di mysql
@@ -80,18 +80,12 @@ const userctrl = {
       const { body } = req;
       models.checkEmail(body.email).then((result) => {
         if (result.length <= 0) {
-          res.json({
-            msg: 'Email salah',
-          });
+          failed(res, 400, 'Email salah');
         } else {
           const passwordHash = result[0].password;
           const pw = bcrypt.compareSync(body.password, passwordHash);
           if (pw === true) {
-            res.json({
-              result,
-              token: env.token,
-              msg: 'login success',
-            });
+            successlogin(res, result, env.token);
           } else {
             failed(res, 404, 'password salah');
           }
@@ -121,7 +115,6 @@ const userctrl = {
     try {
       const { body } = req;
       const { id } = req.params;
-      const idUpd = body.id;
       const first = body.first_name;
       const last = body.last_name;
       const birth = body.birth_date;
@@ -131,7 +124,7 @@ const userctrl = {
       const { password } = body;
       const { address } = body;
       const phone = body.phone_number;
-      models.update(id, idUpd, first, last, birth, gender, username, email, password, address, phone)
+      models.update(id, first, last, birth, gender, username, email, password, address, phone)
         .then((result) => {
           success(res, result, 'Update User Data Success');
         })

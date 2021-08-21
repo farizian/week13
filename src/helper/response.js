@@ -8,6 +8,16 @@ const standartResponse = {
     };
     res.json(response);
   },
+  successlogin: (res, data, token) => {
+    const response = {
+      success: true,
+      field: data,
+      code: 200,
+      message: 'login success',
+      token,
+    };
+    res.json(response);
+  },
   failed: (res, code, err) => {
     if (code === 500) {
       const response = {
@@ -23,7 +33,7 @@ const standartResponse = {
         success: false,
         data: null,
         code,
-        error: err,
+        err,
         message: 'Bad Request',
       };
       res.json(response);
@@ -32,8 +42,7 @@ const standartResponse = {
         success: false,
         data: null,
         code,
-        error: err,
-        message: 'Wrong Token',
+        err,
       };
       res.json(response);
     } else if (code === 401) {
