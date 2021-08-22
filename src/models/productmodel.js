@@ -48,7 +48,7 @@ const prdmodel = {
     });
   }),
   update: (id, img, disc, prdname, price, category) => new Promise((resolve, reject) => {
-    db.query(`update product set picture='${img}', disc='${disc}', prdname='${prdname}', price='${price}', category_id='${category}' where id='${id}' `, (err, result) => {
+    db.query(`update product set img='${img}', disc='${disc}', prdname='${prdname}', price='${price}', category_id='${category}' where id='${id}' `, (err, result) => {
       if (err) {
         reject(err);
       } else {
