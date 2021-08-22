@@ -30,7 +30,7 @@ const prdmodel = {
     });
   }),
   insert: (idStyle, img, disc, prdname, price, category, qty) => new Promise((resolve, reject) => {
-    db.query(`insert into product (idStyle, img, disc, prdname, price, category_id, qty) value ('${idStyle}','${img}', '${prdname}', '${disc}', '${price}', '${category}', '${qty}')`, (err, result) => {
+    db.query(`insert into product (idStyle, img, disc, prdname, price, category_id, qty) value ('${idStyle}','${img}', '${disc}', '${prdname}', '${price}', '${category}', '${qty}')`, (err, result) => {
       if (err) {
         reject(err);
       } else {
