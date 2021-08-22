@@ -84,13 +84,12 @@ const productctrl = {
     try {
       const { body } = req;
       const { id } = req.params;
-      const { idStyle } = body;
       const { img } = body;
       const { disc } = body;
       const { prdname } = body;
       const { price } = body;
       const category = body.category_id;
-      models.update(id, idStyle, img, disc, prdname, price, category).then((result) => {
+      models.update(id, img, disc, prdname, price, category).then((result) => {
         success(res, result, 'Update Product Data Success');
       })
         .catch((err) => {

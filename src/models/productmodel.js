@@ -47,8 +47,8 @@ const prdmodel = {
       }
     });
   }),
-  update: (id, idStyle, img, disc, prdname, price, category) => new Promise((resolve, reject) => {
-    db.query(`update product set idStyle='${idStyle}', picture='${img}', disc='${disc}', prdname='${prdname}', price='${price}', category_id='${category}' where id='${id}' `, (err, result) => {
+  update: (id, img, disc, prdname, price, category) => new Promise((resolve, reject) => {
+    db.query(`update product set picture='${img}', disc='${disc}', prdname='${prdname}', price='${price}', category_id='${category}' where id='${id}' `, (err, result) => {
       if (err) {
         reject(err);
       } else {
